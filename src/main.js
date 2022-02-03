@@ -2,9 +2,14 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import '@/assets/css/tailwind.css'
+import axios from 'axios';
+
+axios.defaults.baseURL = 'https://api.example.com';
+
 
 
 Vue.config.productionTip = false
+Vue.prototype.$axios = axios
 
 new Vue({
   router,
