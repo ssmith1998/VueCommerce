@@ -5,7 +5,7 @@
     VueCommerce
   </div>
   <nav class="mainNav">
-    <router-link v-for="(link,index) in pageLinks" :key="index" class="text-white px-6" :to="link.link">{{link.label}}</router-link>
+    <router-link v-for="(link,index) in pageLinks" :key="index" class="text-white px-6" :to="{name: link.link}">{{link.label}}</router-link>
   </nav>
 </header>
 </template>
@@ -17,15 +17,15 @@ data () {
   return {
     pageLinks: [
       {
-        link: 'home',
+        link: 'Home',
         label: 'Home'
       },
       {
-        link: 'about',
+        link: 'About',
         label: 'About'
       },
       {
-        link: 'store',
+        link: 'Store',
         label: 'Store'
       }
     ],
