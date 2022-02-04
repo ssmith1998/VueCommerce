@@ -13,6 +13,8 @@ props: {
         type: Boolean,
         default: false
     }
+},
+methods: {
 }
 }
 </script>

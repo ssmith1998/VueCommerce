@@ -8,14 +8,14 @@
     <div v-for="(product,index) in products" :key="index"  class="card flex flex-col justify-center p-10 bg-white rounded-lg shadow-2xl mx-6 my-6">
       <div class="prod-title">
         <p class="text-2xl uppercase text-gray-900 font-bold">{{product.title}}</p>
-        <p class="uppercase text-sm text-gray-400">
-          {{product.description}}
-        </p>
       </div>
       <div class="prod-img">
         <img :src="product.image"
              class="w-full object-cover object-center" />
       </div>
+      <p class="uppercase text-sm text-gray-400 py-6">
+          {{clipString(product.description)}}
+        </p>
       <div class="prod-info grid gap-10">
         <div>
           <ul class="flex flex-row justify-center items-center">
@@ -59,11 +59,11 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 import filterDrawer from "@/components/filterDrawer"
 export default {
   data () {
     return {
-      products: [],
       openFilter:false
     }
   },
@@ -71,10 +71,22 @@ export default {
     'filter-drawer': filterDrawer
   },
   created () {
-    this.$axios.get('products').then((response) => {
-      console.log(response)
-      this.products = response.data
+    this.$store.dispatch('shop/ListProducts').then((products) => {
+      console.log(products)
     })
+  },
+  methods: {
+    ...mapActions('shop', ['ListProducts']),
+     clipString (str) {
+         return (str.length > 60) ? str.substr(0, 60-1) + '...' : str;
+
+    }
+  },
+
+  computed: {
+    products () {
+      return this.$store.state.shop.products
+    }
   }
 }
 </script>
