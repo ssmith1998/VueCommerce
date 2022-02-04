@@ -1,6 +1,40 @@
 <template>
   <div :class="open ? 'filterDrawerOpen py-6' : 'filterDrawer py-6'">
       <h6 class="font-bold text-white">Filters</h6>
+
+      <div class="filtersWrapper p-6">
+<form @submit.prevent="onFilter">
+    <select v-model="filters.category" v-if="categories.length > 0"  name="categories" id="categories" class="form-select appearance-none
+      block
+      w-full
+      px-3
+      py-1.5
+      text-base
+      font-normal
+      text-gray-700
+      bg-white bg-clip-padding bg-no-repeat
+      border border-solid border-gray-300
+      rounded
+      transition
+      ease-in-out
+      m-0
+      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
+      <option selected disabled value="0">-- Select Category --</option>
+        <option v-for="(category, index) in categories" :key="index" :value="category">{{category}}</option>
+     </select>
+     <div class="flex mt-6">
+         <input type="number" step="1" placeholder="Price From">
+         <input type="number" step="1" placeholder="Price To">
+     </div>
+
+  <button :disabled="filters.category === '0'" class=" disabled:bg-black bg-blue text-white hover:bg-white hover:text-black font-bold py-2 px-4 rounded mt-4 w-full">
+        Filter
+    </button>
+</form>
+    <button @click="onReset" class=" bg-green text-white hover:bg-white hover:text-black font-bold py-2 px-4 rounded mt-4 w-full">
+        Reset Filter
+    </button>
+      </div>
   </div>
 </template>
 
@@ -14,7 +48,29 @@ props: {
         default: false
     }
 },
+data () {
+    return {
+        filters: {
+            category: '0'
+        }
+    }
+},
 methods: {
+onFilter () {
+    this.$emit('filter', this.filters)
+},
+onReset () {
+    this.filters = {
+        category: '0'
+    }
+    console.log(this.filters)
+    this.$emit('reset')
+}
+},
+computed: {
+    categories () {
+        return this.$store.state.shop.categories
+    }
 }
 }
 </script>

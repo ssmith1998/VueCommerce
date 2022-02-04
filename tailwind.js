@@ -6,6 +6,7 @@ module.exports = {
       'blue-alt': '#1844c7',
       'white': '#ffffff',
       'black': '#000000',
+      'green': '#4aa832',
 
     },
     extend: {},
