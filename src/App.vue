@@ -9,7 +9,7 @@ import nav from '@/components/nav'
 export default {
   components: {
     'main-nav' : nav
-  }
+  },
 }
 </script>
 <style>

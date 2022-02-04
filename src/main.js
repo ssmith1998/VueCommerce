@@ -4,7 +4,7 @@ import router from './router'
 import '@/assets/css/tailwind.css'
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://api.example.com';
+axios.defaults.baseURL = 'https://fakestoreapi.com';
 
 
 
