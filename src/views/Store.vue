@@ -4,9 +4,12 @@
     <button v-if="!openFilter" @click="openFilter = !openFilter" class="font-bold cursor-pointer rounded-full border bg-blue-alt p-6 filterBtn text-white hover:bg-white hover:text-blue transition ease-in duration-300">Filter</button>
     <button v-else @click="openFilter = !openFilter" class="font-bold cursor-pointer rounded-full border bg-blue-alt p-6 filterBtn text-white hover:bg-white hover:text-blue transition ease-in duration-300">Close</button>
     <div class=" items-center">
-  <div class="store p-4">
+  <div v-if="products.length > 0" class="store p-4">
    <product-item v-for="(product,index) in products" :key="index"  :product="product" />
   </div>
+    <template v-else>
+      <h3 class="text-center font-bold w-full">There are no products to show</h3>
+    </template>
 </div>
   </div>
 </template>

@@ -83,8 +83,10 @@ data () {
 },
 methods: {
 onFilter () {
-    this.$emit('filter', this.filters)
-    console.log(this.filters)
+    if(this.filters.category !== '0' || this.filters.price_from || this.filters.price_to) {
+        this.$emit('filter', this.filters)
+        console.log(this.filters)
+    }
 },
 onReset () {
     this.filters = {

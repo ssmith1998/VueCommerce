@@ -40,6 +40,30 @@ export default {
                             return product
                         }
                     })
+                } else if (payload.category === '0' && !payload.price_from && payload.price_to) {
+                    data = response.data.filter(product => {
+                        if (parseInt(payload.price_to) >= product.price) {
+                            return product
+                        }
+                    })
+                } else if (payload.category === '0' && payload.price_from && !payload.price_to) {
+                    data = response.data.filter(product => {
+                        if (parseInt(payload.price_from) <= product.price) {
+                            return product
+                        }
+                    })
+                } else if (payload.category !== '0' && payload.price_from && !payload.price_to) {
+                    data = response.data.filter(product => {
+                        if (parseInt(payload.price_from) <= product.price) {
+                            return product
+                        }
+                    })
+                } else if (payload.category !== '0' && !payload.price_from && payload.price_to) {
+                    data = response.data.filter(product => {
+                        if (parseInt(payload.price_to) >= product.price) {
+                            return product
+                        }
+                    })
                 }
                 resolve(data)
                 commit('list', data)

@@ -7,9 +7,19 @@
 <script>
 import nav from '@/components/nav'
 export default {
+  watch:{
+    $route (to){
+        document.title = `VueCommerce - ${to.name}`
+    }
+},
   components: {
     'main-nav' : nav
   },
+  computed: {
+    title () {
+      return this.$route.title
+    }
+  }
 }
 </script>
 <style>
