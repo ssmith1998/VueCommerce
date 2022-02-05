@@ -23,11 +23,37 @@
         <option v-for="(category, index) in categories" :key="index" :value="category">{{category}}</option>
      </select>
      <div class="flex mt-6">
-         <input type="number" step="1" placeholder="Price From">
-         <input type="number" step="1" placeholder="Price To">
+         <input v-model="filters.price_from" type="number" step="1" placeholder="Price From" class="block
+      w-full
+      px-3
+      py-1.5
+      text-base
+      font-normal
+      text-gray-700
+      bg-white bg-clip-padding bg-no-repeat
+      border border-solid border-gray-300
+      rounded
+      transition
+      ease-in-out
+      m-0
+      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none mr-4">
+         <input v-model="filters.price_to" type="number" step="1" placeholder="Price To" class="block
+      w-full
+      px-3
+      py-1.5
+      text-base
+      font-normal
+      text-gray-700
+      bg-white bg-clip-padding bg-no-repeat
+      border border-solid border-gray-300
+      rounded
+      transition
+      ease-in-out
+      m-0
+      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none ml-4">
      </div>
 
-  <button :disabled="filters.category === '0'" class=" disabled:bg-black bg-blue text-white hover:bg-white hover:text-black font-bold py-2 px-4 rounded mt-4 w-full">
+  <button class=" disabled:bg-black bg-blue text-white hover:bg-white hover:text-black font-bold py-2 px-4 rounded mt-4 w-full">
         Filter
     </button>
 </form>
@@ -58,6 +84,7 @@ data () {
 methods: {
 onFilter () {
     this.$emit('filter', this.filters)
+    console.log(this.filters)
 },
 onReset () {
     this.filters = {
