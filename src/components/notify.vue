@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showNotification" class="notification" :style="`background-color:${color};`">
+  <div :class="showNotification ? 'notificationShow' : 'notification'" :style="`background-color:${color};`">
       <p>{{message}}</p>
   </div>
 </template>
@@ -23,7 +23,7 @@ props: {
     },
     duration: {
        type: Number,
-        default: 3000,
+        default: 4000,
     }
 },
 methods: {
@@ -44,6 +44,19 @@ methods: {
     right: 5px;
     padding:10px;
     color:white;
+    opacity: 0;
     border-radius: 10px;
+    transition: opacity 0.8s;
+}
+
+.notificationShow {
+    position: fixed;
+    top: 5px;
+    right: 5px;
+    padding:10px;
+    color:white;
+    opacity: 1;
+    border-radius: 10px;
+    transition: opacity 0.8s;
 }
 </style>
