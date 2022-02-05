@@ -1,11 +1,12 @@
 <template>
   <div class="p-16">
+    <notify ref="notify" :message="notify.message" />
     <filter-drawer :open="openFilter" @filter="onFilter" @reset="onReset" />
     <button v-if="!openFilter" @click="openFilter = !openFilter" class="font-bold cursor-pointer rounded-full border bg-blue-alt p-6 filterBtn text-white hover:bg-white hover:text-blue transition ease-in duration-300">Filter</button>
     <button v-else @click="openFilter = !openFilter" class="font-bold cursor-pointer rounded-full border bg-blue-alt p-6 filterBtn text-white hover:bg-white hover:text-blue transition ease-in duration-300">Close</button>
     <div class=" items-center">
   <div v-if="products.length > 0" class="store p-4">
-   <product-item v-for="(product,index) in products" :key="index"  :product="product" />
+   <product-item v-for="(product,index) in products" :key="index"  :product="product" @addToBasket="onAddToBasket" />
   </div>
     <template v-else>
       <h3 class="text-center font-bold w-full">There are no products to show</h3>
@@ -17,20 +18,32 @@
 <script>
 import filterDrawer from "@/components/filterDrawer"
 import productItem from "@/components/productItem"
+import notify from '@/components/notify.vue'
+
 export default {
   data () {
     return {
-      openFilter:false
+      openFilter:false,
+      notify: {
+        message: ''
+      }
     }
   },
   components: {
     'filter-drawer': filterDrawer,
-    'product-item': productItem
+    'product-item': productItem,
+    'notify': notify
   },
   created () {
     this.onRequest()
   },
   methods: {
+    onAddToBasket (product) {
+      console.log(product)
+      this.notify.message = `Product ${product.title} has been added to your basket!`
+      this.$refs.notify.show()
+
+    },
     onFilter(filters) {
       this.$store.dispatch('shop/filterProducts', filters).then(() => {
         this.openFilter = false
