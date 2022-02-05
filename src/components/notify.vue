@@ -47,6 +47,7 @@ methods: {
     opacity: 0;
     border-radius: 10px;
     transition: opacity 0.8s;
+    pointer-events: none
 }
 
 .notificationShow {
