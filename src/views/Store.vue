@@ -5,7 +5,7 @@
     <button v-if="!openFilter" @click="openFilter = !openFilter" class="font-bold cursor-pointer rounded-full border bg-blue-alt p-6 filterBtn text-white hover:bg-white hover:text-blue transition ease-in duration-300">Filter</button>
     <button v-else @click="openFilter = !openFilter" class="font-bold cursor-pointer rounded-full border bg-blue-alt p-6 filterBtn text-white hover:bg-white hover:text-blue transition ease-in duration-300">Close</button>
     <div class=" items-center">
-  <div v-if="products.length > 0" class="store p-4">
+  <div v-if="products.length > 0" class="store grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-4">
    <product-item v-for="(product,index) in products" :key="index"  :product="product" @addToBasket="onAddToBasket" />
   </div>
     <template v-else>
@@ -80,10 +80,10 @@ export default {
 </script>
 
 <style>
-.store {
+/* .store {
   display: grid;
 grid-template-columns: repeat(3, 1fr);
-}
+} */
 
 .filterBtn{
   position: fixed;
