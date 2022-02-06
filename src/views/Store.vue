@@ -1,7 +1,7 @@
 <template>
   <div class="p-16">
     <notify ref="notify" :message="notify.message" />
-    <filter-drawer :open="openFilter" @filter="onFilter" @reset="onReset" />
+    <filter-drawer :open="openFilter" @filter="onFilter" @reset="onReset"/>
     <button v-if="!openFilter" @click="openFilter = !openFilter" class="font-bold cursor-pointer rounded-full border bg-blue-alt p-6 filterBtn text-white hover:bg-white hover:text-blue transition ease-in duration-300">Filter</button>
     <button v-else @click="openFilter = !openFilter" class="font-bold cursor-pointer rounded-full border bg-blue-alt p-6 filterBtn text-white hover:bg-white hover:text-blue transition ease-in duration-300">Close</button>
     <div class=" items-center">
@@ -36,6 +36,16 @@ export default {
   },
   created () {
     this.onRequest()
+    if(this.$route.query.category){
+      console.log(this.$route.query.category)
+      let filters = {
+        category: this.$route.query.category
+      }
+      this.$store.dispatch('shop/filterProducts', filters).then((response) => {
+        console.log('FILTER',response)
+      })
+    }
+  
   },
   methods: {
     onAddToBasket (product) {

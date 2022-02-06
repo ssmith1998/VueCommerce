@@ -100,6 +100,9 @@ computed: {
     categories () {
         return this.$store.state.shop.categories
     }
+},
+created () {
+
 }
 }
 </script>
